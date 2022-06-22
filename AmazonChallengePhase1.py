@@ -12,11 +12,11 @@ a = [
     [0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
     [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
+]#Define the fundamental grid
 zoom = 20
 borders = 6
-start = 0,0
-end = 9,9
+start = 0,0 #Define the start point
+end = 9,9 #Define delivery point
 
 def make_step(k):
   for i in range(len(m)):
@@ -74,7 +74,7 @@ def draw_matrix(a,m, the_path = []):
     draw.rectangle((0, 0, zoom * len(a[0]), zoom * len(a)), outline=(0,255,0), width=2)
     images.append(im)
 
-
+#Define a matrix to show the possible steps of the vehicle
 m = []
 for i in range(len(a)):
     m.append([])
@@ -83,11 +83,13 @@ for i in range(len(a)):
 i,j = start
 m[i][j] = 1
 
+#Comput the steps
 k = 0
 while m[end[0]][end[1]] == 0:
     k += 1
     make_step(k)
 
+#Find the shortest path
 i, j = end
 k = m[i][j]
 the_path = [(i,j)]
@@ -125,6 +127,7 @@ while k > 1:
     the_path.insert(0,(i, j))
     k-=1
 
+#Create a GIF for the shortest path
 for i in range(10):
     if i % 2 == 0:
         draw_matrix(a, m, the_path)
